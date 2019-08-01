@@ -1,0 +1,77 @@
+GOAL:
+  SetOnPlanet (ILSE, ABLE2)
+  Fluid(WARM)
+
+INITIAL:
+  OnEarth(ILSE)
+  Fluid(COLD)
+
+NAME:
+  TakeOff (x)
+PRE:
+  OnEarth (x)
+DELETE:
+  OnEarth (x)
+ADD:
+  InOrbit (x)
+  Speed (x, LOW)
+
+NAME:
+  FireRockets(x, planet)
+PRE:
+  InSpace (x)
+  Speed (x, HIGH)
+  MovingTo (x, DEEPSPACE)
+DELETE:
+  MovingTo (x, DEEPSPACE)
+ADD:
+  MovingTo (x, planet)
+
+NAME:
+  GoFaster (x)
+PRE:
+  InOrbit (x)
+  Speed (x, LOW)
+DELETE:
+  InOrbit (x)
+  Speed (x, LOW)
+ADD:
+  InSpace (x)
+  Speed (x, HIGH)
+  MovingTo (x, DEEPSPACE)
+
+NAME:
+  AdjustToLand (x, planet)
+PRE:
+  InSpace (x)
+  MovingTo (x, planet)
+  Speed (x, HIGH)
+DELETE:
+  Speed (x, HIGH)
+  MovingTo (x, planet)
+ADD:
+  Near (x, planet)
+  Speed (x, LOW)
+
+NAME:
+  WarmTheFluid (x)
+PRE:
+  Landed (x, planet)
+  Fluid (COLD)
+DELETE:
+  Fluid(COLD)
+ADD:
+  SetOnPlanet (x, planet)
+  Fluid (WARM)
+
+NAME:
+  LandOn (x, planet)
+PRE:
+  Near  (x, planet)
+  Speed (x, LOW)
+DELETE:
+  Near (x, planet)
+  Speed (x, LOW)
+ADD:
+  Landed (x, planet)
+  
